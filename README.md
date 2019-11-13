@@ -3,7 +3,7 @@
 Built from source - https://github.com/balena-io/etcher
 
 ## Installation
-### Package Repository
+### Package Repository - https://packagecloud.io/swift-arm/etcher
 Add repository
 ```
 curl -s https://packagecloud.io/install/repositories/swift-arm/etcher/script.deb.sh | sudo bash
