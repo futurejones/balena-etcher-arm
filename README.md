@@ -18,3 +18,9 @@ sudo apt-get install balena-etcher-electron
 wget <deb package>
 sudo apt install ./<deb package>
 ```
+##
+<b>Tested Devices</b>
+- Raspberry Pi 4 - Raspbian Buster
+- PineBook Pro - Debian Stretch
+- Asus Tinkerboard - Tinker OS (Debian Stretch)
+##
