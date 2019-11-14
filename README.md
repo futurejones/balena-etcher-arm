@@ -24,3 +24,6 @@ sudo apt install ./<deb package>
 - PineBook Pro - Debian Stretch
 - Asus Tinkerboard - Tinker OS (Debian Stretch)
 ##
+
+<img src="etcher-flashing.png" alt="etcher flashing" height="500">
+
