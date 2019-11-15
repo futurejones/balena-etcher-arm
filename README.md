@@ -1,4 +1,4 @@
-# <img src="balena-etcher-electron.png" alt="Balena logo" height="70">balena-etcher-arm
+# <img src="images/balena-etcher-electron.png" alt="Balena logo" height="70">balena-etcher-arm
 ## Balena Etcher for Raspberry Pi 4, PineBook Pro and other Arm devices
 Built from source - https://github.com/balena-io/etcher
 
@@ -25,5 +25,5 @@ sudo apt install ./<deb package>
 - Asus Tinkerboard - Tinker OS (Debian Stretch)
 ##
 
-<img src="etcher-flashing.png" alt="etcher flashing" height="500">
+<img src="images/etcher-flashing.png" alt="etcher flashing" height="500">
 

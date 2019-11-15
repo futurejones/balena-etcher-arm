@@ -1,0 +1,4 @@
+balena-etcher-electron ([version number])
+
+
+ -- Balena Inc. <hello@etcher.io>  [build date]
