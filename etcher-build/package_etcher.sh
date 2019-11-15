@@ -60,6 +60,7 @@ detect_os
 echo 
 echo "✅  Packaging Resources"
 cp -r balena-etcher-electron_ver_dist_ver_arch balena-etcher-electron_$version\_$os\_$dist\_$arch
+mkdir balena-etcher-electron_$version\_$os\_$dist\_$arch/opt
 cp -r etcher/dist/linux-armv7l-unpacked balena-etcher-electron_$version\_$os\_$dist\_$arch/opt/balenaEtcher
 echo
 echo "✅  Building Package"
