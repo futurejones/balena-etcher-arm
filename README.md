@@ -1,8 +1,8 @@
 # <img src="images/balena-etcher-electron.png" alt="Balena logo" height="70">balena-etcher-arm
 ## Balena Etcher for Raspberry Pi 4, PineBook Pro and other Arm devices
 Built from source - https://github.com/balena-io/etcher
-
-## Installation
+### [Build Instructions](etcher-build/README.md)
+## Installation using apt-get
 ### Package Repository - https://packagecloud.io/swift-arm/etcher
 Add repository
 ```
