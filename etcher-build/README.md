@@ -18,8 +18,9 @@ Add version number for build or none to build the master
 # to build version v1.5.36
 ./build.sh v1.5.36
 ```
-NOTE: The build will fail with this error `make: *** [Makefile:112: electron-build] Error 1`.  
-This is because the inbuilt electron package system is for x86 machines and is not compatible with the arm cpu on the Raspberry Pi. We will use `dpkg-deb` to package etcher in the next step.
+NOTE: The build will end with this error `make: *** [Makefile:112: electron-build] Error 1`.  
+This is because the inbuilt electron package system is for x86 machines and is not compatible with the arm cpu on the Raspberry Pi.  
+This does not matter as we will use `dpkg-deb` to package etcher in the next step.
 ### Package etcher
 ```
 ./package_etcher.sh
