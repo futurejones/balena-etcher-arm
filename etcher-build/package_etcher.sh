@@ -1,11 +1,24 @@
 #!/bin/bash
 # Package Etcher
 
-arch="armhf"
-version="1.5.63+a1558116"
+arch=`dpkg --print-architecture`
+version=""
 echo
 echo "✅  Check System"
-
+get_version ()
+{
+  # rm builder-effective-config.json
+  # create json from yaml
+  python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)' < etcher/dist/builder-effective-config.yaml > builder-effective-config.json
+  version=$(cat builder-effective-config.json | jq -r '.extraMetadata.version')
+  echo "etcher version = $version"
+}
+update_control ()
+{
+  # updating control file
+  sed -i "s/#\?\(Version:\s*\).*$/\1$version/" balena-etcher-electron_$version\_$os\_$dist\_$arch/DEBIAN/control
+  sed -i "s/#\?\(Architecture:\s*\).*$/\1$arch/" balena-etcher-electron_$version\_$os\_$dist\_$arch/DEBIAN/control
+}
 detect_os ()
 {
   if [[ ( -z "${os}" ) && ( -z "${dist}" ) ]]; then
@@ -53,13 +66,18 @@ detect_os ()
   os="${os// /}"
   dist="${dist// /}"
 
-  echo "Detected operating system as $os/$dist/$arch."
+  echo "Detected operating system as $os/$dist/$arch"
 }
 
 detect_os
+get_version
+
 echo 
 echo "✅  Packaging Resources"
-cp -r balena-etcher-electron_ver_dist_ver_arch balena-etcher-electron_$version\_$os\_$dist\_$arch
+
+rm -rf balena-etcher-electron_$version\_$os\_$dist\_$arch*
+cp -r default_deb_package balena-etcher-electron_$version\_$os\_$dist\_$arch
+update_control
 mkdir balena-etcher-electron_$version\_$os\_$dist\_$arch/opt
 cp -r etcher/dist/linux-armv7l-unpacked balena-etcher-electron_$version\_$os\_$dist\_$arch/opt/balenaEtcher
 echo
