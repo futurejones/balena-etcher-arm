@@ -15,8 +15,8 @@ Add version number for build or none to build the master
 # to build master
 ./build.sh
 
-# to build version v1.5.36
-./build.sh v1.5.36
+# to build version v1.5.63
+./build.sh v1.5.63
 ```
 NOTE: The build will end with this error `make: *** [Makefile:112: electron-build] Error 1`.  
 This is because the inbuilt electron package system is for x86 machines and is not compatible with the arm cpu on the Raspberry Pi.  
