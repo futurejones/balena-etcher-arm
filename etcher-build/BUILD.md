@@ -1,4 +1,4 @@
-After trying many different build combinations, including writing my own packaging script, I have found the following to be the most reliable and contestant method of building Etcher. This method has been tested on a fresh install of Raspbian Buster on a Raspberry Pi 4.
+After trying many different build combinations, including writing my own packaging script, I have found the following to be the most reliable and consistent method of building Etcher. This method has been tested on a fresh install of Raspbian Buster on a Raspberry Pi 4.
 
 **Build Instructions**
 1. Install build dependencies.  
