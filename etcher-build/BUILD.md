@@ -5,7 +5,7 @@ After trying many different build combinations, including writing my own packagi
 ```
 sudo apt-get install -y git python gcc g++ make libx11-dev libxkbfile-dev fakeroot rpm libsecret-1-dev jq python2.7-dev python-pip python-setuptools libudev-dev
 sudo apt-get install ruby-dev
-sudo gem install fpm -v 1.10.2 #note: must be v1.10.2 NOT v1.11.0
+sudo gem install fpm -v 1.10.2 --no-document #note: must be v1.10.2 NOT v1.11.0
 #install NodeJS
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
