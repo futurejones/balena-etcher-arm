@@ -1,4 +1,7 @@
+## For armv7 / arm64 / aarch64 - Ubuntu / Debian
+
 After trying many different build combinations, including writing my own packaging script, I have found the following to be the most reliable and consistent method of building Etcher. This method has been tested on a fresh install of Raspbian Buster on a Raspberry Pi 4.
+Also tested on arm64 / aarch64 Ubuntu 16.04 / 19.10
 
 **Build Instructions**
 1. Install build dependencies.  
