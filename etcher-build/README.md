@@ -1,3 +1,5 @@
+# [New Build Instructions for armv7/arm64](BUILD.md)
+
 # Build Instructions for Raspberry Pi 4 - Raspbian Buster
 ### clone repo
 ```
