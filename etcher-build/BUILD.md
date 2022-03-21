@@ -56,6 +56,6 @@ USE_SYSTEM_FPM="true" make electron-build
 ```
 #  *.deb package will be in /etcher/dist/*
 # filename will depend on which release version was checked out
-sudo apt-get install ./dist/balena-etcher-electron_1.5.63+a1558116_armv7l.deb 
+sudo apt-get install ./dist/balena-etcher-electron_<version>-<arch>.deb 
 ```
 Note: You can ignore the `chmod: cannot access '/opt/balenaEtcher/chrome-sandbox': No such file or directory` warning. It is caused by the `postinst` file and is only relevant for electron versions 5+.
