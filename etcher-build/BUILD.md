@@ -1,16 +1,17 @@
 ## For armv7 / arm64 / aarch64 - Ubuntu / Debian
+*updated 2022/03/21*
 
-After trying many different build combinations, including writing my own packaging script, I have found the following to be the most reliable and consistent method of building Etcher. This method has been tested on a fresh install of Raspbian Buster on a Raspberry Pi 4.
-Also tested on arm64 / aarch64 Ubuntu 16.04 / 19.10
+After trying many different build combinations, including writing my own packaging script, I have found the following to be the most reliable and consistent method of building Etcher. This method has been tested on a fresh install of Raspberry OS Bullseye on a Raspberry Pi 4.
+Also tested on arm64 / aarch64 Ubuntu 20.04 and Debian 11/bullseye
 
 **Build Instructions**
 1. Install build dependencies.  
 ```
-sudo apt-get install -y git python gcc g++ make libx11-dev libxkbfile-dev fakeroot rpm libsecret-1-dev jq python2.7-dev python-pip python-setuptools libudev-dev
+sudo apt-get install -y git curl python gcc g++ make libx11-dev libxkbfile-dev fakeroot rpm libsecret-1-dev jq python2.7-dev python-pip python-setuptools libudev-dev
 sudo apt-get install ruby-dev
-sudo gem install fpm -v 1.10.2 --no-document #note: must be v1.10.2 NOT v1.11.0
+sudo gem install fpm --no-document #tested with version 1.14.1
 #install NodeJS
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
@@ -18,7 +19,7 @@ sudo apt-get install -y nodejs
 ```
 git clone --recursive https://github.com/balena-io/etcher
 cd etcher
-git checkout v1.5.63
+git checkout v1.7.8 #latest version available 2022/03/21
 ```
 
 3. Install Requirements  
@@ -43,8 +44,10 @@ sed -i 's/tiffutil/#tiffutil/g' Makefile
 sed -i 's/TARGETS="deb rpm appimage"/TARGETS="deb"/g' scripts/resin/electron/build.sh
 ```
 
-6. Build and Package 
+6. Build and Package  
+
 ```
+# Note: run `make electron-develop` before running build.
 # use USE_SYSTEM_FPM="true" to force the use of the installed FPM version
 USE_SYSTEM_FPM="true" make electron-build 
 ```
