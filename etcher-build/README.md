@@ -1,30 +1,61 @@
-# [New Build Instructions for armv7/arm64](BUILD.md)
+## For armv7 / arm64 / aarch64 - Ubuntu / Debian
+*updated 2022/03/21*
 
-# Build Instructions for Raspberry Pi 4 - Raspbian Buster
-### clone repo
+After trying many different build combinations, including writing my own packaging script, I have found the following to be the most reliable and consistent method of building Etcher. This method has been tested on a fresh install of Raspberry OS Bullseye on a Raspberry Pi 4.
+Also tested on arm64 / aarch64 Ubuntu 20.04 and Debian 11/bullseye
+
+**Build Instructions**
+1. Install build dependencies.  
 ```
-git clone https://github.com/futurejones/balena-etcher-arm.git
-cd balena-etcher-arm/etcher-build/
-```
-### Install dependencies
-```
-./install_dependencies.sh
+sudo apt-get install -y git curl python gcc g++ make libx11-dev libxkbfile-dev fakeroot rpm libsecret-1-dev jq python2.7-dev python-pip python-setuptools libudev-dev
+sudo apt-get install ruby-dev
+sudo gem install fpm --no-document #tested with version 1.14.1
+#install NodeJS
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get install -y nodejs
 ```
 
-### Build etcher
-Add version number for build or none to build the master
+2. Clone Repo and Checkout Release . 
 ```
-# to build master
-./build.sh
+git clone --recursive https://github.com/balena-io/etcher
+cd etcher
+git checkout v1.7.8 #latest version available 2022/03/21
+```
 
-# to build version v1.5.63
-./build.sh v1.5.63
+3. Install Requirements  
 ```
-NOTE: The build will end with this error `make: *** [Makefile:112: electron-build] Error 1`.  
-This is because the inbuilt electron package system is for x86 machines and is not compatible with the arm cpu on the Raspberry Pi.  
-This does not matter as we will use `dpkg-deb` to package etcher in the next step.
-### Package etcher
+pip install -r requirements.txt
 ```
-./package_etcher.sh
+
+4. Setup and Install NPM Modules . 
 ```
-You should now have `balena-etcher-electron_1.5.63+a1558116_raspbian_buster_armhf.deb` in the `etcher-build` directory.
+make electron-develop
+``` 
+At this point you should be able to run a test of Etcher with -
+```
+npm start
+```
+
+5. Patch Build Files 
+```
+# disable tiffutil in the Makefile as this is a Mac only app and will cause the build to fail
+sed -i 's/tiffutil/#tiffutil/g' Makefile 
+# restrict output to .deb package only to save build time
+sed -i 's/TARGETS="deb rpm appimage"/TARGETS="deb"/g' scripts/resin/electron/build.sh
+```
+
+6. Build and Package  
+
+```
+# Note: run `make electron-develop` before running build.
+# use USE_SYSTEM_FPM="true" to force the use of the installed FPM version
+USE_SYSTEM_FPM="true" make electron-build 
+```
+
+7. Install Package 
+```
+#  *.deb package will be in /etcher/dist/*
+# filename will depend on which release version was checked out
+sudo apt-get install ./dist/balena-etcher-electron_<version>-<arch>.deb 
+```
+Note: You can ignore the `chmod: cannot access '/opt/balenaEtcher/chrome-sandbox': No such file or directory` warning. It is caused by the `postinst` file and is only relevant for electron versions 5+.
