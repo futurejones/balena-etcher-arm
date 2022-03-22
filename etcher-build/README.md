@@ -7,11 +7,11 @@ Also tested on arm64 / aarch64 Ubuntu 20.04 and Debian 11/bullseye
 **Build Instructions**
 1. Install build dependencies.  
 ```
-sudo apt-get install -y git curl python gcc g++ make libx11-dev libxkbfile-dev fakeroot rpm libsecret-1-dev jq python2.7-dev python-pip python-setuptools libudev-dev
+sudo apt-get install -y git curl python gcc g++ make libx11-dev libxkbfile-dev fakeroot rpm libsecret-1-dev jq python2.7-dev python3-pip python-setuptools libudev-dev
 sudo apt-get install ruby-dev
 sudo gem install fpm --no-document #tested with version 1.14.1
 #install NodeJS
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
@@ -38,8 +38,6 @@ npm start
 
 5. Patch Build Files 
 ```
-# disable tiffutil in the Makefile as this is a Mac only app and will cause the build to fail
-sed -i 's/tiffutil/#tiffutil/g' Makefile 
 # restrict output to .deb package only to save build time
 sed -i 's/TARGETS="deb rpm appimage"/TARGETS="deb"/g' scripts/resin/electron/build.sh
 ```
